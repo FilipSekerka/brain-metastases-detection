@@ -2,7 +2,7 @@
 import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
-from keras.optimizers import Adam
+from keras.optimizers import adam_v2 as adam
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, CSVLogger
 from math import ceil
 import numpy as np
@@ -80,7 +80,7 @@ model = SSD(image_size=(img_height, img_width, img_channels),
             nms_max_output_size=400)
 
 # 2: Instantiate an Adam optimizer and the SSD loss function and compile the model
-adam = Adam(lr=0.0002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
+adam = adam.Adam(lr=0.0002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
