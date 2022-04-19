@@ -106,7 +106,6 @@ valPath = os.path.join(image_dir, 'imgVal.h5')
 trn_file = h5py.File(trnPath, 'r')
 val_file = h5py.File(valPath, 'r')
 
-
 trn_set = trn_file['dataset_01']
 val_set = val_file['dataset_01']
 
