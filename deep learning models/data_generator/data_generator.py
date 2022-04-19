@@ -330,7 +330,7 @@ class DataGenerator:
                     box = [] # Store the box class and coordinates here
                     box.append(row[self.input_format.index('image_name')].strip()) # Select the image name column in the input format and append its content to `box`
                     for element in self.labels_output_format: # For each element in the output format (where the elements are the class ID and the four box coordinates)...
-                        box.append(int(row[self.input_format.index(element)].strip())) # ...select the respective column in the input format and append it to `box`.
+                        box.append(float(row[self.input_format.index(element)].strip())) # ...select the respective column in the input format and append it to `box`.
                     data.append(box)
 
         data = sorted(data) # The data needs to be sorted, otherwise the next step won't give the correct result

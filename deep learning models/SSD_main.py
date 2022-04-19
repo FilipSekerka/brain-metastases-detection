@@ -1,4 +1,3 @@
-
 import os
 
 import keras.utils.vis_utils
@@ -36,40 +35,40 @@ from data_generator.data_augmentation_chain import DataAugmentationConstantInput
 # from data_generator_3chan.data_generator import DataGenerator
 # from data_generator_3chan.data_augmentation_chain import DataAugmentationConstantInputSize
 
-img_height = 256 
-img_width = 256 
+img_height = 256
+img_width = 256
 img_channels = 1
 
 # for SSD_ResNet and SSD_ResFPN
 # img_channels = 3
 
-intensity_mean = None 
-intensity_range = 1 
+intensity_mean = None
+intensity_range = 1
 swap_channels = False
-n_classes = 1 
+n_classes = 1
 min_scale = None
 max_scale = None
-scales = [0.008, 0.016, 0.032, 0.064, 0.115, 0.2, 0.3] 
+scales = [0.008, 0.016, 0.032, 0.064, 0.115, 0.2, 0.3]
 ar_global = [1.0]
-ar_per_layer = None 
+ar_per_layer = None
 
-two_boxes_for_ar1 = True 
-steps = None 
-offsets = None 
-clip_boxes = False 
-variances = [0.5, 0.5, 0.5, 0.5] 
+two_boxes_for_ar1 = True
+steps = None
+offsets = None
+clip_boxes = False
+variances = [0.5, 0.5, 0.5, 0.5]
 normalize_coords = True
 
 # 1: build the model
 model = SSD(image_size=(img_height, img_width, img_channels),
             n_classes=n_classes,
             l2_regularization=0,
-            min_scale = min_scale,
-            max_scale = max_scale,
-            scales = scales,
-            aspect_ratios_global = ar_global,
-            aspect_ratios_per_layer = ar_per_layer,
-            two_boxes_for_ar1 = two_boxes_for_ar1,
+            min_scale=min_scale,
+            max_scale=max_scale,
+            scales=scales,
+            aspect_ratios_global=ar_global,
+            aspect_ratios_per_layer=ar_per_layer,
+            two_boxes_for_ar1=two_boxes_for_ar1,
             steps=steps,
             offsets=offsets,
             clip_boxes=clip_boxes,
@@ -77,7 +76,7 @@ model = SSD(image_size=(img_height, img_width, img_channels),
             normalize_coords=normalize_coords,
             subtract_mean=intensity_mean,
             divide_by_stddev=intensity_range,
-            swap_channels = swap_channels,
+            swap_channels=swap_channels,
             confidence_thresh=0.5,
             iou_threshold=0.1,
             top_k='all',
@@ -88,69 +87,70 @@ adam = adam.Adam(learning_rate=0.0002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, 
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
-print(model.summary())
-
-
-
-# keras.utils.vis_utils.plot_model(model, to_file="model.png")
+# print(model.summary())
+#
+#
+#
+# # keras.utils.vis_utils.plot_model(model, to_file="model.png")
 
 # # 3: Initiate data generators
-# trn_dataset = DataGenerator(hdf5_dataset_path = None)
-# val_dataset = DataGenerator(hdf5_dataset_path = None)
-#
+trn_dataset = DataGenerator(hdf5_dataset_path=None)
+val_dataset = DataGenerator(hdf5_dataset_path=None)
+
 # # not-useful image dir
-# image_dir = '/user/path to image folder/'
+image_dir = 'data'
 #
-# trnPath = os.path.join(image_dir, 'imgTrn.h5')
-# valPath = os.path.join(image_dir, 'imgVal.h5')
-#
-# trn_file = h5py.File(trnPath, 'r')
-# val_file = h5py.File(valPath, 'r')
-#
-# trn_set = trn_file['imgTrn']
-# val_set = val_file['imgVal']
-#
-# trnMax = np.max(trn_set)
-# valMax = np.max(val_set)
-#
-# val_set = val_set/valMax * trnMax
-#
-# trn_set = np.moveaxis(trn_set, [0, 1, 2], [-1, -2, -3])
-# val_set = np.moveaxis(val_set, [0, 1, 2], [-1, -2, -3])
-#
-# # Ground truth
-# trn_labels_filename = os.path.join(image_dir, 'labels_trn.csv')
-# val_labels_filename = os.path.join(image_dir, 'labels_val.csv')
-#
-# trn_dataset.parse_csv(images_dir=image_dir,
-#                       labels_filename=trn_labels_filename,
-#                       input_format=['image_name', 'xmin', 'xmax', 'ymin', 'ymax', 'class_id'],
-#                       include_classes='all')
-#
-# val_dataset.parse_csv(images_dir=image_dir,
-#                       labels_filename=val_labels_filename,
-#                       input_format=['image_name', 'xmin', 'xmax', 'ymin', 'ymax', 'class_id'],
-#                       include_classes='all')
-#
-# trn_dataset.create_hdf5_datasetZZ(trn_set,
-#                                   file_path='zztemp_trn.h5',
-#                                   resize=False,
-#                                   variable_image_size=False,
-#                                   verbose=True)
-#
-# val_dataset.create_hdf5_datasetZZ(val_set,
-#                                   file_path='zztemp_val.h5',
-#                                   resize=False,
-#                                   variable_image_size=False,
-#                                   verbose=True)
-#
-# # Get the number of samples in the training and validations datasets.
-# trn_dataset_size = trn_dataset.get_dataset_size()
-# val_dataset_size = val_dataset.get_dataset_size()
-#
-# print("Number of images in the trn dataset:\t{:>6}".format(trn_dataset_size))
-# print("Number of images in the val dataset:\t{:>6}".format(val_dataset_size))
-#
+trnPath = os.path.join(image_dir, 'imgTrn.h5')
+valPath = os.path.join(image_dir, 'imgVal.h5')
+
+trn_file = h5py.File(trnPath, 'r')
+val_file = h5py.File(valPath, 'r')
+
+
+trn_set = trn_file['dataset_01']
+val_set = val_file['dataset_01']
+
+trnMax = np.max(trn_set)
+valMax = np.max(val_set)
+
+val_set = val_set / valMax * trnMax
+
+trn_set = np.moveaxis(trn_set, [0, 1, 2], [-1, -2, -3])
+val_set = np.moveaxis(val_set, [0, 1, 2], [-1, -2, -3])
+
+# Ground truth
+trn_labels_filename = os.path.join(image_dir, 'labels_trn_new.csv')
+val_labels_filename = os.path.join(image_dir, 'labels_val_new.csv')
+
+trn_dataset.parse_csv(images_dir=image_dir,
+                      labels_filename=trn_labels_filename,
+                      input_format=['image_name', 'xmin', 'xmax', 'ymin', 'ymax', 'class_id'],
+                      include_classes='all')
+
+val_dataset.parse_csv(images_dir=image_dir,
+                      labels_filename=val_labels_filename,
+                      input_format=['image_name', 'xmin', 'xmax', 'ymin', 'ymax', 'class_id'],
+                      include_classes='all')
+
+trn_dataset.create_hdf5_datasetZZ(trn_set,
+                                  file_path='zztemp_trn.h5',
+                                  resize=False,
+                                  variable_image_size=False,
+                                  verbose=True)
+
+val_dataset.create_hdf5_datasetZZ(val_set,
+                                  file_path='zztemp_val.h5',
+                                  resize=False,
+                                  variable_image_size=False,
+                                  verbose=True)
+
+# Get the number of samples in the training and validations datasets.
+trn_dataset_size = trn_dataset.get_dataset_size()
+val_dataset_size = val_dataset.get_dataset_size()
+
+print("Number of images in the trn dataset:\t{:>6}".format(trn_dataset_size))
+print("Number of images in the val dataset:\t{:>6}".format(val_dataset_size))
+
 # # set the batchsize
 # batch_size = 16
 #
@@ -246,4 +246,3 @@ print(model.summary())
 #                               initial_epoch=initial_epoch)
 # # save the model
 # model.save('/path/SSD.h5')
-#
