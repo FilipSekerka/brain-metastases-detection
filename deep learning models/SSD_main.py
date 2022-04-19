@@ -88,11 +88,11 @@ adam = adam.Adam(learning_rate=0.0002, beta_1=0.9, beta_2=0.999, epsilon=1e-08, 
 ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
-# print(model.summary())
+print(model.summary())
 
 
 
-keras.utils.vis_utils.plot_model(model, to_file="model.png")
+# keras.utils.vis_utils.plot_model(model, to_file="model.png")
 
 # # 3: Initiate data generators
 # trn_dataset = DataGenerator(hdf5_dataset_path = None)
