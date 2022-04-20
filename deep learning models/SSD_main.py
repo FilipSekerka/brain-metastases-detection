@@ -166,13 +166,13 @@ data_augmentation_chain = DataAugmentationConstantInputSize(random_flip = 0.5,
                                                             n_boxes_min=1,
                                                             background=0)
 #
-# # 5: Instantiate an encoder that can encode ground truth labels into the format needed by the SSD loss function.
-# predictor_sizes = [model.get_layer('L128_mbox_conf').output_shape[1:3],
-#                    model.get_layer('L64_mbox_conf').output_shape[1:3],
-#                    model.get_layer('L32_mbox_conf').output_shape[1:3],
-#                    model.get_layer('L16_mbox_conf').output_shape[1:3],
-#                    model.get_layer('L8_mbox_conf').output_shape[1:3],
-#                    model.get_layer('L4_mbox_conf').output_shape[1:3]]
+# 5: Instantiate an encoder that can encode ground truth labels into the format needed by the SSD loss function.
+predictor_sizes = [model.get_layer('L128_mbox_conf').output_shape[1:3],
+                   model.get_layer('L64_mbox_conf').output_shape[1:3],
+                   model.get_layer('L32_mbox_conf').output_shape[1:3],
+                   model.get_layer('L16_mbox_conf').output_shape[1:3],
+                   model.get_layer('L8_mbox_conf').output_shape[1:3],
+                   model.get_layer('L4_mbox_conf').output_shape[1:3]]
 #
 # ssd_input_encoder = SSDInputEncoder(img_height=img_height,
 #                                     img_width=img_width,
