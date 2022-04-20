@@ -26,7 +26,7 @@ from skimage.transform import resize
 
 
 count = 0
-new_file = [['image_name', 'xmin', 'xmax', 'ymin', 'ymax', 'class_id']]
+new_file = [['image_name', 'xmin', 'ymin', 'xmax', 'ymax', 'class_id']]
 with open("data/labels_trn.csv") as file:
     file.readline()
 
@@ -37,7 +37,7 @@ with open("data/labels_trn.csv") as file:
             break
 
         values = line.split(",")
-        new_file.append([str(count)] + values[3:] + ["0"])
+        new_file.append([str(count)] + [values[5]] + [values[6]] + [values[3]] + [values[4]] + ["0"])
         # new_file.append([values[0]] + values[3:] + ["0"])
 
 with open("data/labels_trn_new.csv", "w") as file:
