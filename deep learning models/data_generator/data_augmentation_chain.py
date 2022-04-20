@@ -18,9 +18,8 @@ limitations under the License.
 
 from __future__ import division
 import numpy as np
-
-from data_generator.geometric_ops import RandomFlip, RandomTranslate, RandomScale, RandomRotate
-from data_generator.image_boxes_validation_utils import BoxFilter, ImageValidator
+from geometric_ops import RandomFlip, RandomTranslate, RandomScale, RandomRotate
+from image_boxes_validation_utils import BoxFilter, ImageValidator
 
 class DataAugmentationConstantInputSize:
     '''

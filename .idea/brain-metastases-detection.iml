@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/deep learning models" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/deep learning models/bounding_box_utils" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/deep learning models/data_generator" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/deep learning models/data_generator_3chan" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/deep learning models/keras_layers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/deep learning models/keras_loss_function" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/deep learning models/ssd_encoder_decoder" isTestSource="false" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

@@ -28,8 +28,8 @@ from keras_loss_function.keras_ssd_Loss import SSDLoss
 # from keras_loss_function.keras_ssd_focalLoss import SSD_fcLoss
 
 from ssd_encoder_decoder.ssd_input_encoder import SSDInputEncoder
-from data_generator.data_generator import DataGenerator
-from data_generator.data_augmentation_chain import DataAugmentationConstantInputSize
+from data_generator import DataGenerator
+from data_augmentation_chain import DataAugmentationConstantInputSize
 
 # if use ResNet backbone and RetinaNet
 # from data_generator_3chan.data_generator import DataGenerator
@@ -150,21 +150,21 @@ val_dataset_size = val_dataset.get_dataset_size()
 print("Number of images in the trn dataset:\t{:>6}".format(trn_dataset_size))
 print("Number of images in the val dataset:\t{:>6}".format(val_dataset_size))
 
-# # set the batchsize
-# batch_size = 16
-#
-# # 4: Define the image processing chain.
-# data_augmentation_chain = DataAugmentationConstantInputSize(random_flip = 0.5,
-#                                                             random_translate = ((0.03,0.3), (0.03,0.3), 0.5),
-#                                                             random_scale = (0.9, 3.0, 0.5),
-#                                                             random_rotate = ((90, 180, 270), 0.5),
-#                                                             n_trials_max = 4,
-#                                                             clip_boxes=True,
-#                                                             overlap_criterion='area',
-#                                                             bounds_box_filter=(0.5, 1.0),
-#                                                             bounds_validator=(0.5, 1.0),
-#                                                             n_boxes_min=1,
-#                                                             background=0)
+# set the batchsize
+batch_size = 16
+
+# 4: Define the image processing chain.
+data_augmentation_chain = DataAugmentationConstantInputSize(random_flip = 0.5,
+                                                            random_translate = ((0.03,0.3), (0.03,0.3), 0.5),
+                                                            random_scale = (0.9, 3.0, 0.5),
+                                                            random_rotate = ((90, 180, 270), 0.5),
+                                                            n_trials_max = 4,
+                                                            clip_boxes=True,
+                                                            overlap_criterion='area',
+                                                            bounds_box_filter=(0.5, 1.0),
+                                                            bounds_validator=(0.5, 1.0),
+                                                            n_boxes_min=1,
+                                                            background=0)
 #
 # # 5: Instantiate an encoder that can encode ground truth labels into the format needed by the SSD loss function.
 # predictor_sizes = [model.get_layer('L128_mbox_conf').output_shape[1:3],

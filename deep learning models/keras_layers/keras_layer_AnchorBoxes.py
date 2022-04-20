@@ -21,7 +21,7 @@ import numpy as np
 import keras.backend as K
 from keras.layers import InputSpec, Layer
 
-from bounding_box_utils.bounding_box_utils import convert_coordinates
+from bounding_box_utils import convert_coordinates
 
 class AnchorBoxes(Layer):
     '''
